@@ -14,14 +14,14 @@ jobs:
  
       - name: Deploy to Server
         env:
-          SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SERVER_IP: ${{ secrets.ec2-52-91-220-138.compute-1.amazonaws.com }}  # Die IP-Adresse der EC2-Instanz aus Secrets
+          SSH_KEY: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
+          SERVER_IP: ${{ secrets.ec2-54-146-212-132.compute-1.amazonaws.com }}  # Die IP-Adresse der EC2-Instanz aus Secrets
         run: |
           # SSH Key speichern
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > private_key.pem
+          echo "${{ secrets.AWS_SSH_PRIVATE_KEY }}" | tr -d '\r' > private_key.pem
           chmod 600 private_key.pem
           # Git-Pull direkt auf dem Server ausführen
-          ssh -i private_key.pem -o StrictHostKeyChecking=no ubuntu@52.91.220.138 << 'EOF'
+          ssh -i private_key.pem -o StrictHostKeyChecking=no ubuntu@54.146.212.132 << 'EOF'
  
             cd /var/www/html
             # git fetch --all
